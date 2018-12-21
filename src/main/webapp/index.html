@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录-特斯汀学院-接口项目实战</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/body.css" />
+</head>
+<body onload="checkAuth();">
+	<div class="container">
+		<div>
+			<img style="float: left;width: 250px;left: -100px;position: relative;top: -40px;" src="http://pbxvaidl1.bkt.clouddn.com/wp-content/themes/busiprof/images/logo.png" alt="特斯汀学院" />
+		</div>
+		<div style="float:right;">
+		<a id="doc" href="./SOAP?wsdl" target="_blank">wsdl文档</a>&nbsp|&nbsp
+			<a id="qiehuan" href="">接口文档</a>&nbsp|&nbsp<a id="logout" href="./register.html">注册</a>
+			<br/><br/>
+			<input id="SOAP" onclick="javascript:changeType('SOAP')" type="radio" name="radio" value="1" checked/>SOAP
+			<input id="REST" onclick="javascript:changeType('REST')" type="radio" name="radio" value="2"/>REST
+			<input id="HTTP" onclick="javascript:changeType('HTTP')" type="radio" name="radio" value="3"/>HTTP
+		</div>
+		<section id="content">
+		<div id="Msg" style="color:red;"></div>
+		<form id="loginForm">
+			<h1>账号登录</h1>
+			<div>
+				<input type="text" placeholder="用户名" onblur="javascript:checkStr(this.value,this)" name="username" id="username" />
+			</div>
+			<div>
+				<input type="password" placeholder="密码" onblur="javascript:checkStr(this.value,this)" name="password" id="password"/>
+			</div>
+			<div class="">
+				<span class="help-block u-errormessage" id="js-server-helpinfo">测试账号：Will   123456</span>
+			</div>
+			<div>
+				<!-- <input type="submit" value="Log in" /> -->
+				<input type="button" onclick="login()" value="登录" class="btn btn-primary"
+					id="js-btn-login" /> <a
+					href="http://wpa.qq.com/msgrd?v=3&uin=1052949192&site=qq&menu=yes" target="_blank">忘记密码?</a>
+			</div>
+		</form>
+		<!-- form -->
+		<div class="button">
+			<span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>
+			<a href="http://112.74.191.10/" target="_blank">进入官网</a>
+		</div>
+		<!-- button --> </section>
+		<!-- content -->
+	</div>
+	<!-- container -->
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<div style="text-align: center;">
+		<p>
+			来源:特斯汀学院(Testing.C)软件测试项目： <a href="http://112.74.191.10/"
+				target="_blank" title="接口测试项目">接口测试项目</a> - contact us <a
+				href="http://wpa.qq.com/msgrd?v=3&uin=1052949192&site=qq&menu=yes"
+				title="联系我们" target="_blank">联系我们</a>
+		</p>
+	</div>
+	<script src="./js/login.js"></script>
+
+</body>
+</html>
