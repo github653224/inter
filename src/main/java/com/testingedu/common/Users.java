@@ -19,12 +19,12 @@ public class Users {
 				describe = "";
 			}
 			if (checkParam(name, 3, 17) && checkParam(pwd, 3, 17) && checkParam(nickname, 3, 37)
-					&& checkParam(describe, 0, 127)) {
-				
-				if(Token.mysql.checkUser(name)) {
+					&& checkParam(describe, 0, 128)) {
+
+				if (Token.mysql.checkUser(name)) {
 					return "{\"status\":401,\"msg\":\"用户已被注册\"}";
 				}
-				
+
 				if (Token.mysql.PRegister(name, pwd, nickname, describe) == 0)
 					return "{\"status\":400,\"msg\":\"参数错误\"}";
 				else
@@ -41,12 +41,13 @@ public class Users {
 		if (token == null || Token.getToken(token) == null) {
 			return "{\"status\":405,\"msg\":\"非法请求\"}";
 		}
+		Token.updateToken(token);
 		if (Token.getToken(token) == "null") {
 			return "{\"status\":401,\"msg\":\"您还未登录\"}";
 		}
 		if (!checkParam(id, 1, 11)) {
 			return "{\"status\":402,\"msg\":\"参数错误！\"}";
-		}else {
+		} else {
 			int i = 0;
 			try {
 				i = Integer.parseInt(id);
@@ -57,7 +58,7 @@ public class Users {
 			}
 		}
 		if (Token.updateToken(token)) {
-			if(!id.equals(Token.getToken(token))) {
+			if (!id.equals(Token.getToken(token))) {
 				return "{\"status\":404,\"msg\":\"非法查询\"}";
 			}
 			Map<String, String> map = Token.mysql.getUserInfo(id);
@@ -68,7 +69,7 @@ public class Users {
 					res += ",\"" + key + "\":\"" + map.get(key) + "\"";
 				}
 			} else {
-				//理论上不会出现
+				// 理论上不会出现
 				res = "{\"status\":402,\"msg\":\"参数错误\"";
 			}
 			return res + "}";

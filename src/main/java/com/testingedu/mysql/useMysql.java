@@ -24,7 +24,7 @@ public class useMysql {
 	 */
 	public Map<String, String> getUserInfo(String id) {
 		String sql = "SELECT * FROM userinfo where id='" + id + "';";
-		System.out.println(sql);
+		// System.out.println(sql);
 		// 保存结果集
 		ResultSet rs = null;
 		// 创建执行sql的操作状态
@@ -47,7 +47,7 @@ public class useMysql {
 						map.put(rsmd.getColumnName(i), rs.getString(i));
 				}
 				// 这个功能在登录并没有用到，我只是教同学们怎么使用查询结果
-				System.out.println(map.toString());
+				// System.out.println(map.toString());
 				// 如果查询结果不为空，就返回登录成功
 				return map;
 			}
@@ -68,7 +68,7 @@ public class useMysql {
 	 */
 	public String Login(String name, String pwd) {
 		String sql = "SELECT * FROM userinfo where username='" + name + "' AND pwd='" + pwd + "';";
-		System.out.println(sql);
+		// System.out.println(sql);
 		// 保存结果集
 		ResultSet rs = null;
 		// 创建执行sql的操作状态
@@ -135,7 +135,7 @@ public class useMysql {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 注册前查询用户名是否存在
 	 * 
@@ -144,7 +144,7 @@ public class useMysql {
 	 */
 	public boolean checkUser(String name) {
 		String sql = "SELECT * FROM userinfo where username='" + name + "';";
-		System.out.println(sql);
+		// System.out.println(sql);
 		// 保存结果集
 		ResultSet rs = null;
 		// 创建执行sql的操作状态
