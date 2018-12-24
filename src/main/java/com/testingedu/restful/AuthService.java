@@ -7,22 +7,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
 import com.testingedu.common.Login;
+import com.testingedu.common.Token;
 
 @Path("/auth")
 public class AuthService {
-	@Context
-	HttpServletRequest request;
-
+	@Context HttpServletRequest request;
+	
+	
 	/**
-	 * 权限校验和刷新接口 方法用来校验并初始化当前请求
-	 * 
+	 * 权限校验和刷新接口
+	 * 方法用来校验并初始化当前请求
 	 * @param 无
 	 * @return json
 	 */
 	@POST
 	@Produces("text/plain;charset=UTF-8")
 	public String auth() {
-		// System.out.println(request.getHeader("token"));
+		System.out.println(request.getHeader("token"));
 		String token = request.getHeader("token");
 		Login login = new Login();
 		return login.auth(token);

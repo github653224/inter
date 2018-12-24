@@ -329,7 +329,7 @@ function regist() {
 		xmlhttp.send(datas); 
 	}else{
 		if(type=="REST"){
-			xmlhttp.open("POST",URL + "user/register?"+encodeURIComponent("{\"username\":\"" +document.getElementById("username").value+'","pwd":"'+document.getElementById("password").value+'","nickname":"'+document.getElementById("nickname").value+'","describe":"'+document.getElementById("describe").value +'"}'), false);
+			xmlhttp.open("POST",URL + "user/{\"name\":\"" +document.getElementById("username").value+'","pwd":"'+document.getElementById("password").value+'","nickname":"'+document.getElementById("nickname").value+'","describe":"'+document.getElementById("describe").value +'"}', false);
 			xmlhttp.setRequestHeader ("Content-Type","text/xml; charset=utf-8"); 
 			xmlhttp.setRequestHeader ("token",getCookie("token"));
 			xmlhttp.send(); 
@@ -340,7 +340,7 @@ function regist() {
 			xmlhttp.setRequestHeader ("token",getCookie("token"));
 			xmlhttp.send(); 
 		}
-	}	
+	}
 	// alert(datas);//SOAP请求报文格式
 
 	var obj;

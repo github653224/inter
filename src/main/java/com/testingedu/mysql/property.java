@@ -15,7 +15,7 @@ public class property {
 	public property() {
 		config = new Properties();
 		url = property.class.getResource("").getPath().replaceAll("%20", " ");
-		url = url.substring(1, url.indexOf("classes") + 8);
+		url = url.substring(1, url.indexOf("classes")+8);
 		path = url + "inter.properties";
 		System.out.println("配置文件：" + path);
 		mysqlPath = property.readRcErpURL("jdbcUrl");
