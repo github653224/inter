@@ -16,6 +16,7 @@ import com.testingedu.mysql.useMysql;
 
 public class Token {
 	private static Map<String,String> accountMap = new HashMap<String, String>();
+	private static Map<String,String> idMap = new HashMap<String, String>();
 	private static Map<String,Long> timeMap = new HashMap<String, Long>();
 	private static Map<String,String> tokenMap = new HashMap<String, String>();
 	public static useMysql mysql;
@@ -29,6 +30,7 @@ public class Token {
 	public static String newToken() {
 		String token = UUID.randomUUID().toString().replace("-", "");
 		accountMap.put(token, "null");
+		idMap.put(token, "null");
 		return token;
 	}
 	
@@ -39,7 +41,7 @@ public class Token {
 	 * @return token对应值
 	 */
 	public static String getToken(String token) {
-		return accountMap.get(token);
+		return idMap.get(token);
 	}
 	
 	/**
@@ -48,10 +50,11 @@ public class Token {
 	 * @param username，token
 	 * @return token
 	 */
-	public static String setToken(String username,String token) {
+	public static String setToken(String userid,String name,String token) {
 		//保存token的用户信息到缓存
-		tokenMap.put(username, token);
-		accountMap.put(token, username);
+		tokenMap.put(userid, token);
+		idMap.put(token, userid);
+		accountMap.put(token, name);
 		//System.out.println(getToken(token));
 		long times = System.currentTimeMillis();
 		//记录token的开始时间
@@ -85,8 +88,9 @@ public class Token {
 	 */
 	public static void delToken(String token) {
 		if(accountMap.get(token)!=null) {
-			tokenMap.remove(accountMap.get(token));
+			tokenMap.remove(idMap.get(token));
 			accountMap.remove(token);
+			idMap.remove(token);
 			timeMap.remove(token);
 		}
 	}

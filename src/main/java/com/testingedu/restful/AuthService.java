@@ -7,7 +7,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
 import com.testingedu.common.Login;
-import com.testingedu.common.Token;
 
 @Path("/auth")
 public class AuthService {

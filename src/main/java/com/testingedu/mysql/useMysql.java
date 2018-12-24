@@ -135,6 +135,38 @@ public class useMysql {
 		}
 		return null;
 	}
+	
+	/**
+	 * 注册前查询用户名是否存在
+	 * 
+	 * @param userid
+	 * @return map结果集合
+	 */
+	public boolean checkUser(String name) {
+		String sql = "SELECT * FROM userinfo where username='" + name + "';";
+		System.out.println(sql);
+		// 保存结果集
+		ResultSet rs = null;
+		// 创建执行sql的操作状态
+		Statement sm;
+		try {
+			sm = ct.createStatement();
+			// 执行查询
+			rs = sm.executeQuery(sql);
+
+			// 执行更新，删除，插入操作
+			// int rs1 = sm.executeUpdate(sql);
+			// rs表示有多少行的内容
+			if (rs != null && rs.next()) {
+				return true;
+			}
+			sm.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	/**
 	 * 注册方法 通过存储过程，更新用户注册信息

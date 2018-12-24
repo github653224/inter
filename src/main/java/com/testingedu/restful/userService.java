@@ -6,7 +6,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import com.testingedu.common.Token;
 import com.testingedu.common.Users;
 
 import net.sf.json.JSONObject;

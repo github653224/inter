@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.testingedu.common.Token;
 import com.testingedu.common.Users;
 /**
  * Servlet implementation class login

@@ -36,7 +36,7 @@ public class Login {
 			String res = "{";
 			String id = Token.mysql.Login(name, pwd);
 			if (id != null) {
-				Token.setToken(name, t);
+				Token.setToken(id,name, t);
 				res += "\"status\":200,\"msg\":\"恭喜您，登录成功\",\"userid\":\"" + id + "\"}";
 			} else {
 				res += "\"status\":401,\"msg\":\"用户名密码错误\"}";
@@ -50,7 +50,7 @@ public class Login {
 
 	public String logout(String token) {
 		if (token==null || Token.getToken(token) == null) {
-			return "{\"status\":406,\"msg\":\"非法请求\"}";
+			return "{\"status\":405,\"msg\":\"非法请求\"}";
 		}
 		Token.delToken(token);
 		return "{\"status\":200,\"msg\":\"用户已退出登录\"}";

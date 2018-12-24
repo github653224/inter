@@ -18,14 +18,19 @@ public class Users {
 			if (describe == null) {
 				describe = "";
 			}
-			if (checkParam(name, 0, 17) && checkParam(pwd, 0, 17) && checkParam(nickname, 0, 36)
+			if (checkParam(name, 3, 17) && checkParam(pwd, 3, 17) && checkParam(nickname, 3, 37)
 					&& checkParam(describe, 0, 127)) {
+				
+				if(Token.mysql.checkUser(name)) {
+					return "{\"status\":401,\"msg\":\"用户已被注册\"}";
+				}
+				
 				if (Token.mysql.PRegister(name, pwd, nickname, describe) == 0)
 					return "{\"status\":400,\"msg\":\"参数错误\"}";
 				else
 					return "{\"status\":200,\"msg\":\"注册成功\"}";
 			} else {
-				return "{\"status\":401,\"msg\":\"参数错误\"}";
+				return "{\"status\":402,\"msg\":\"参数错误\"}";
 			}
 		} else {
 			return "{\"status\":406,\"msg\":\"登录状态，不能注册\"}";
@@ -34,21 +39,27 @@ public class Users {
 
 	public String getUserInfo(String token, String id) {
 		if (token == null || Token.getToken(token) == null) {
-			return "{\"status\":406,\"msg\":\"非法请求\"}";
+			return "{\"status\":405,\"msg\":\"非法请求\"}";
 		}
 		if (Token.getToken(token) == "null") {
 			return "{\"status\":401,\"msg\":\"您还未登录\"}";
 		}
-		if (!checkParam(id, 0, 11)) {
+		if (!checkParam(id, 1, 11)) {
+			return "{\"status\":402,\"msg\":\"参数错误！\"}";
+		}else {
 			int i = 0;
 			try {
 				i = Integer.parseInt(id);
 			} catch (Exception e) {
 			}
-			if (i == 0)
+			if (i == 0) {
 				return "{\"status\":402,\"msg\":\"参数错误！\"}";
+			}
 		}
 		if (Token.updateToken(token)) {
+			if(!id.equals(Token.getToken(token))) {
+				return "{\"status\":404,\"msg\":\"非法查询\"}";
+			}
 			Map<String, String> map = Token.mysql.getUserInfo(id);
 			String res = "";
 			if (map != null) {
@@ -57,6 +68,7 @@ public class Users {
 					res += ",\"" + key + "\":\"" + map.get(key) + "\"";
 				}
 			} else {
+				//理论上不会出现
 				res = "{\"status\":402,\"msg\":\"参数错误\"";
 			}
 			return res + "}";
@@ -67,7 +79,7 @@ public class Users {
 
 	private boolean checkParam(String str, int l, int r) {
 
-		if (str != null && str.length() > l && str.length() < r) {
+		if (str != null && str.length() >= l && str.length() < r) {
 			return true;
 		}
 
